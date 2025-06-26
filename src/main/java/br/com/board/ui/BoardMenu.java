@@ -1,10 +1,16 @@
 package br.com.board.ui;
 
+import br.com.board.persistence.entity.BoardColumnEntity;
 import br.com.board.persistence.entity.BoardEntity;
+import br.com.board.service.BoardColumnQueryService;
+import br.com.board.service.BoardQueryService;
+import br.com.board.service.CardQueryService;
 import lombok.AllArgsConstructor;
 
 import java.sql.SQLException;
 import java.util.Scanner;
+
+import static br.com.board.persistence.config.ConnectionConfig.getConnection;
 
 @AllArgsConstructor
 public class BoardMenu {
@@ -36,7 +42,7 @@ public class BoardMenu {
                     case 2 -> moveCardToNextColumn();
                     case 3 -> blockCard();
                     case 4 -> unblckCard();
-                    case 5 -> cacelCard();
+                    case 5 -> cancelCard();
                     case 6 -> showBoard();
                     case 7 -> showColumn();
                     case 8 -> showCards();
@@ -63,15 +69,59 @@ public class BoardMenu {
     private void unblckCard() {
     }
 
-    private void cacelCard() {
+    private void cancelCard() {
     }
 
-    private void showBoard() {
+    private void showBoard() throws SQLException {
+        try (var connection = getConnection()) {
+            var optional = new BoardQueryService(connection).showBoardDetails(entity.getId());
+            optional.ifPresent(b -> {
+                System.out.printf("Board [%s,%s]\n", b.id(), b.name());
+                b.columns().forEach(c ->
+                        System.out.printf("Coluna [%s] tipo: [%s] tem %s cards\n", c.name(), c.kind(), c.cardsAmount())
+                );
+            });
+        }
+
     }
 
-    private void showColumn() {
+    private void showColumn() throws SQLException {
+        var columnsIds = entity.getBoardColumns().stream().map(BoardColumnEntity::getId).toList();
+        var selectedColumnId = -1L;
+        while (!columnsIds.contains(selectedColumnId)) {
+            System.out.printf("Select a column from board %s by id\n", entity.getName());
+            entity.getBoardColumns().forEach(c -> System.out.printf("%s - %s [%s]\n", c.getId(), c.getName(), c.getKind()));
+            selectedColumnId = scanner.nextLong();
+        }
+        try (var connection = getConnection()) {
+            var column = new BoardColumnQueryService(connection).findById(selectedColumnId);
+            column.ifPresent(co -> {
+                System.out.printf("Column %s type %s\n", co.getName(), co.getKind());
+                co.getCards().forEach(ca -> System.out.printf("Card %s - %s\nDescription: %s",
+                        ca.getId(), ca.getTitle(), ca.getDescription()));
+            });
+        }
+
+
     }
 
-    private void showCards() {
+    private void showCards()throws SQLException {
+        System.out.println("Inform the card id to show details");
+        var selectedCardId = scanner.nextLong();
+        try(var connection = getConnection()){
+            new CardQueryService(connection).findById(selectedCardId)
+                    .ifPresentOrElse(c->{
+                        System.out.printf("Card %s - %s.\n", c.id(), c.title());
+                        System.out.printf("Description: %s\n", c.description());
+                        System.out.println(c.blocked() ?
+                                "Is Blocked. Reason: " + c.blockReason() :
+                                "Is not blocked");
+                        System.out.printf("Already blocked  %s times\n", c.blocksAmount());
+                        System.out.printf("It is currently in the column %s - %s\n", c.columnId(), c.columnName());
+
+                    },() -> System.out.printf("Card with id %s not found\n", selectedCardId));
+        }
+
+
     }
 }
