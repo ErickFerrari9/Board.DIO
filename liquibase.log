@@ -1,15 +1,15 @@
-jun. 26, 2025 3:21:39 PM liquibase.changelog
+jun. 27, 2025 5:25:37 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/db.changelog-202506241820.sql
-jun. 26, 2025 3:21:39 PM liquibase.changelog
+jun. 27, 2025 5:25:37 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/db.changelog-202506251030.sql
-jun. 26, 2025 3:21:39 PM liquibase.changelog
+jun. 27, 2025 5:25:37 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/db.changelog-202506251300.sql
-jun. 26, 2025 3:21:39 PM liquibase.changelog
+jun. 27, 2025 5:25:37 PM liquibase.changelog
 INFO: Reading resource: db/changelog/migrations/db.changelog-202506251310.sql
-jun. 26, 2025 3:21:40 PM liquibase.changelog
+jun. 27, 2025 5:25:37 PM liquibase.changelog
 INFO: Reading from board.databasechangelog
 Database is up to date, no changesets to execute
-jun. 26, 2025 3:21:40 PM liquibase.changelog
+jun. 27, 2025 5:25:37 PM liquibase.changelog
 INFO: Reading from board.databasechangelog
 
 UPDATE SUMMARY
@@ -19,21 +19,21 @@ Filtered out:                 0
 -------------------------------
 Total change sets:            4
 
-jun. 26, 2025 3:21:40 PM liquibase.util
+jun. 27, 2025 5:25:37 PM liquibase.util
 INFO: UPDATE SUMMARY
-jun. 26, 2025 3:21:40 PM liquibase.util
+jun. 27, 2025 5:25:37 PM liquibase.util
 INFO: Run:                          0
-jun. 26, 2025 3:21:40 PM liquibase.util
+jun. 27, 2025 5:25:37 PM liquibase.util
 INFO: Previously run:               4
-jun. 26, 2025 3:21:40 PM liquibase.util
+jun. 27, 2025 5:25:37 PM liquibase.util
 INFO: Filtered out:                 0
-jun. 26, 2025 3:21:40 PM liquibase.util
+jun. 27, 2025 5:25:37 PM liquibase.util
 INFO: -------------------------------
-jun. 26, 2025 3:21:40 PM liquibase.util
+jun. 27, 2025 5:25:37 PM liquibase.util
 INFO: Total change sets:            4
-jun. 26, 2025 3:21:40 PM liquibase.util
+jun. 27, 2025 5:25:37 PM liquibase.util
 INFO: Update summary generated
-jun. 26, 2025 3:21:40 PM liquibase.lockservice
+jun. 27, 2025 5:25:37 PM liquibase.lockservice
 INFO: Successfully released change log lock
-jun. 26, 2025 3:21:40 PM liquibase.command
+jun. 27, 2025 5:25:37 PM liquibase.command
 INFO: Command execution complete

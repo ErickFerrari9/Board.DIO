@@ -65,9 +65,12 @@ public class BoardMenu {
     private void createCard() throws SQLException {
         var card = new CardEntity();
         System.out.println("Enter the card title:");
-        card.setTitle(scanner.next());
+        scanner.nextLine(); // limpa o buffer, se necessário
+        card.setTitle(scanner.nextLine());
+
         System.out.println("Enter the card description:");
-        card.setDescription(scanner.next());
+        card.setDescription(scanner.nextLine());
+
         card.setBoardColumn(entity.getInitialColumn());
         try (var connection = getConnection()) {
             new CardService(connection).create(card);
